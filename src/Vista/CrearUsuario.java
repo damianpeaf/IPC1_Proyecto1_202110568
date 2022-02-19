@@ -55,49 +55,29 @@ public class CrearUsuario extends JFrame implements ActionListener {
         int altoCaja = 30;
         int gap = 5;
 
-        labelTiulo.setBounds(centro+anchoCaja,50,anchoCaja,altoCaja);
+        //añadiendo elementos
+        JComponent[] componentesFormulario = {labelId,textFieldId,labelNombre,textFieldNombre,labelApellido,textFieldApellido,labelUsuario,textFieldUsuario,labelRol,comboRol,labelContrasena,textFieldContrasena, labelConfirmar,textFieldConfirmar};
 
-        labelId.setBounds(centro,50+altoCaja,anchoCaja,altoCaja);
-        textFieldId.setBounds(centro+anchoCaja,50+altoCaja,anchoCaja,altoCaja);
+        labelTiulo.setBounds(centro+anchoCaja,0,anchoCaja,altoCaja);
 
-        labelNombre.setBounds(centro,50+2*altoCaja,anchoCaja,altoCaja);
-        textFieldNombre.setBounds(centro+anchoCaja,50+2*altoCaja,anchoCaja,altoCaja);
-
-        labelApellido.setBounds(centro,50+3*altoCaja,anchoCaja,altoCaja);
-        textFieldApellido.setBounds(centro+anchoCaja,50+3*altoCaja,anchoCaja,altoCaja);
-
-        labelUsuario.setBounds(centro,50+4*altoCaja,anchoCaja,altoCaja);
-        textFieldUsuario.setBounds(centro+anchoCaja,50+4*altoCaja,anchoCaja,altoCaja);
-
-        labelRol.setBounds(centro,50+5*altoCaja,anchoCaja,altoCaja);
-        comboRol.setBounds(centro+anchoCaja,50+5*altoCaja,anchoCaja,altoCaja);
-
-        labelContrasena.setBounds(centro,50+6*altoCaja,anchoCaja,altoCaja);
-        textFieldContrasena.setBounds(centro+anchoCaja,50+6*altoCaja,anchoCaja,altoCaja);
-
-        labelConfirmar.setBounds(centro,50+7*altoCaja,anchoCaja,altoCaja);
-        textFieldConfirmar.setBounds(centro+anchoCaja,50+7*altoCaja,anchoCaja,altoCaja);
+        int fila =0;
+        for (int i = 0; i < componentesFormulario.length; i+=2) {
+            componentesFormulario[i].setBounds(centro,50+fila*altoCaja,anchoCaja,altoCaja);
+            componentesFormulario[i+1].setBounds(centro+anchoCaja,50+fila*altoCaja,anchoCaja,altoCaja);
+            fila++;
+        }
 
         btnCrear.setBounds(centro,50+8*altoCaja,anchoCaja,altoCaja);
         btnCancelar.setBounds(centro+anchoCaja,50+8*altoCaja,anchoCaja,altoCaja);
+
         btnCrear.addActionListener(this);
         btnCancelar.addActionListener(this);
 
+        //añadiendolos al frame
         container.add(labelTiulo);
-        container.add(labelNombre);
-        container.add(textFieldNombre);
-        container.add(labelApellido);
-        container.add(textFieldApellido);
-        container.add(labelConfirmar);
-        container.add(textFieldConfirmar);
-        container.add(labelContrasena);
-        container.add(textFieldContrasena);
-        container.add(labelId);
-        container.add(textFieldId);
-        container.add(labelRol);
-        container.add(comboRol);
-        container.add(labelUsuario);
-        container.add(textFieldUsuario);
+        for (JComponent componente:componentesFormulario) {
+            container.add(componente);
+        }
         container.add(btnCancelar);
         container.add(btnCrear);
 
