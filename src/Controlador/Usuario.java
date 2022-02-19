@@ -124,7 +124,7 @@ public class Usuario {
     }
 
     public static String[] login(String nombreUsuario, String contrasena){
-        String [] mensaje = new String[3];
+        String [] mensaje = new String[4];
 
         for (int i = 0; i < datosUsuario().length; i++) {
             if (datosUsuario()[i][3].equals(nombreUsuario)) {
@@ -132,10 +132,14 @@ public class Usuario {
                     mensaje[0]="1";
                     mensaje[1]="Bienvenido al sistema " + datosUsuario()[i][3];
                     mensaje[2]=datosUsuario()[i][0];
+                    mensaje[3]=datosUsuario()[i][4];
+
                 }else{
                     mensaje[0]="0";
                     mensaje[1]="Credenciales invalidas para el usuario " + datosUsuario()[i][3];
                     mensaje[2]=null;
+                    mensaje[3]=null;
+
                 }
                 break;
             }else{
@@ -144,6 +148,8 @@ public class Usuario {
                     mensaje[0]="0";
                     mensaje[1]="El usuario no existe, por favor pongase en contácto con el administrador del sistema para efectuar el registro";
                     mensaje[2]=null;
+                    mensaje[3]=null;
+
                 }
             }
 
