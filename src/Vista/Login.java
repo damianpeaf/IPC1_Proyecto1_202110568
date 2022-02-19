@@ -69,7 +69,15 @@ public class Login extends JFrame implements ActionListener {
                 if (respuesta[0].equals("0")) {
                     JOptionPane.showMessageDialog(this,respuesta[1],"Error", JOptionPane.WARNING_MESSAGE);
                 }else{
-                    JOptionPane.showMessageDialog(this,respuesta[1],"Bienvenido", JOptionPane.INFORMATION_MESSAGE);
+                    Login.this.setVisible(false);
+
+                    //0 -> administrador 1->regular maestro/alumno
+                    if (respuesta[3].equals("0")) {
+                        PanelAdministrador panel = new PanelAdministrador(respuesta[2]);
+                        panel.setVisible(true);
+                        JOptionPane.showMessageDialog(panel,respuesta[1],"Bienvenido", JOptionPane.INFORMATION_MESSAGE);
+
+                    }
                 }
             }
 

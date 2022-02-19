@@ -26,4 +26,8 @@ public class EstilosBase extends JFrame {
         frame.getContentPane().setBackground(Color.white);
 
     }
+
+    public void opcionesUsuario(Boolean administrador){
+
+    }
 }
