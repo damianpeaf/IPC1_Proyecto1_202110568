@@ -11,6 +11,8 @@ public class PanelAdministrador extends JFrame implements ActionListener {
 
 
     //propiedades comunes
+    String[] datosUsuario;
+
     JButton btnLogout = new JButton("LogOut");
 
     JButton btnReporteUsuarios = new JButton("Usuario");
@@ -29,6 +31,8 @@ public class PanelAdministrador extends JFrame implements ActionListener {
 
     public PanelAdministrador(String id){
 
+        datosUsuario = Usuario.buscarUsuario(id);
+
         JPanel panel1 = new JPanel();
         JPanel panel2 = new JPanel();
         JPanel panel3 = new JPanel();
@@ -41,7 +45,6 @@ public class PanelAdministrador extends JFrame implements ActionListener {
 
 
         //0->id, 1->nombre, 2->apellido, 3->nombreUsuario, 4->rol, 5->contrasena
-        String[] datosUsuario = Usuario.buscarUsuario(id);
 
         EstilosBase estilosBase = new EstilosBase(this, "Panel de control");
         this.setLayout(new GridLayout(2,2));
@@ -134,6 +137,12 @@ public class PanelAdministrador extends JFrame implements ActionListener {
             Login login = new Login();
             login.setVisible(true);
             JOptionPane.showMessageDialog(login, "Hasta pronto", "LogOut",JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        if (e.getSource() == btnUsuariosCrear) {
+            PanelAdministrador.this.setVisible(false);
+            CrearUsuario crearUsuario = new CrearUsuario(datosUsuario[0]);
+            crearUsuario.setVisible(true);
         }
     }
 }

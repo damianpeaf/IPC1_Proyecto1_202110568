@@ -27,7 +27,4 @@ public class EstilosBase extends JFrame {
 
     }
 
-    public void opcionesUsuario(Boolean administrador){
-
-    }
 }

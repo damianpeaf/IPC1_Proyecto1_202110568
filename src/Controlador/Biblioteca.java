@@ -14,11 +14,11 @@ public class Biblioteca {
         //inicio.setVisible(true);
 
         //para pruebas admin
-        //PanelAdministrador panelAdministrador = new PanelAdministrador("1");
-        //.setVisible(true);
+        PanelAdministrador panelAdministrador = new PanelAdministrador("1");
+        panelAdministrador.setVisible(true);
 
         //para pruebas usuario normal
-        PanelUsuario panelAdministrador = new PanelUsuario("1");
-        panelAdministrador.setVisible(true);
+        //PanelUsuario panelAdministrador = new PanelUsuario("1");
+        //panelAdministrador.setVisible(true);
     }
 }

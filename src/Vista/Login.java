@@ -29,7 +29,6 @@ public class Login extends JFrame implements ActionListener {
         labelContrasena.setFont(new Font("Arial",Font.BOLD, 16));
 
         this.setLayout(null);
-
         int variable = this.getSize().width/3;
 
         labelTitulo.setBounds(variable+100,50,100,30);
@@ -49,11 +48,20 @@ public class Login extends JFrame implements ActionListener {
         container.add(btnCancelar);
 
         btnLogin.addActionListener(this);
+        btnCancelar.addActionListener(this);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btnCancelar) {
+            textFieldpassword.setText("");
+            textFieldUsuario.setText("");
+            Login.this.setVisible(false);
+            Inicio panel = new Inicio();
+            panel.setVisible(true);
+        }
+
         if (e.getSource() == btnLogin) {
             String usuario = textFieldUsuario.getText();
             String contrasena = textFieldpassword.getText();
@@ -62,25 +70,34 @@ public class Login extends JFrame implements ActionListener {
             // 0->dejar pasar, 1-> Mensaje, 2->idUsuario, 3->rol
 
             if (usuario.equals("") || contrasena.equals("")) {
-                JOptionPane.showMessageDialog(this,"Debe de rellenar los campos","Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Debe de rellenar los campos", "Error", JOptionPane.ERROR_MESSAGE);
 
-            }else{
-                String[] respuesta = Usuario.login(usuario,contrasena);
+            } else {
+                String[] respuesta = Usuario.login(usuario, contrasena);
                 if (respuesta[0].equals("0")) {
-                    JOptionPane.showMessageDialog(this,respuesta[1],"Error", JOptionPane.WARNING_MESSAGE);
-                }else{
+                    JOptionPane.showMessageDialog(this, respuesta[1], "Error", JOptionPane.WARNING_MESSAGE);
+                } else {
                     Login.this.setVisible(false);
 
                     //0 -> administrador 1->regular maestro/alumno
                     if (respuesta[3].equals("0")) {
                         PanelAdministrador panel = new PanelAdministrador(respuesta[2]);
                         panel.setVisible(true);
-                        JOptionPane.showMessageDialog(panel,respuesta[1],"Bienvenido", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(panel, respuesta[1], "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
 
                     }
+                    if (respuesta[3].equals("1") || respuesta[3].equals("2")) {
+                        PanelUsuario panel = new PanelUsuario(respuesta[2]);
+                        panel.setVisible(true);
+                        JOptionPane.showMessageDialog(panel, respuesta[1], "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
+
+                    }
+
                 }
             }
 
         }
+
+
     }
 }
