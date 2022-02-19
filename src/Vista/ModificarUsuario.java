@@ -7,13 +7,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CrearUsuario extends JFrame implements ActionListener {
+public class ModificarUsuario extends JFrame implements ActionListener {
 
     String[] datosUsuario;
 
     Container container=getContentPane();
 
-    JLabel labelTiulo = new JLabel("Crear Usuario");
+    JLabel labelTiulo = new JLabel("Modificar Usuario");
+    JLabel labelIdBuscar = new JLabel("Id a buscar");
+    JTextField textFieldBuscar = new JTextField();
+    JButton btnBuscarId = new JButton("Buscar");
 
     JLabel labelId = new JLabel("ID");
     JTextField textFieldId = new JTextField();
@@ -37,14 +40,13 @@ public class CrearUsuario extends JFrame implements ActionListener {
     JPasswordField textFieldConfirmar = new JPasswordField();
 
 
-    JButton btnCrear = new JButton("Crear");
+    JButton btnCrear = new JButton("Modificar");
     JButton btnCancelar = new JButton("Regresar");
 
-    public CrearUsuario(String id){
+    public ModificarUsuario(String id){
 
         datosUsuario = Usuario.buscarUsuario(id);
-
-        EstilosBase estilosBase = new EstilosBase(this,"Crear Usuario");
+        EstilosBase estilosBase = new EstilosBase(this,"Modificar Usuario");
 
         comboRol.addItem("Estudiante");
         comboRol.addItem("Catedratico");
@@ -57,7 +59,10 @@ public class CrearUsuario extends JFrame implements ActionListener {
 
         //añadiendo elementos
 
-        labelTiulo.setBounds(centro+anchoCaja,0,anchoCaja,altoCaja);
+        labelTiulo.setBounds(centro-anchoCaja,0,anchoCaja,altoCaja);
+        labelIdBuscar.setBounds(centro,0,anchoCaja,altoCaja);
+        textFieldBuscar.setBounds(centro+anchoCaja,0,anchoCaja,altoCaja);
+        btnBuscarId.setBounds(centro+2*anchoCaja,0,anchoCaja,altoCaja);
 
         JComponent[] componentesFormulario = {labelId,textFieldId,labelNombre,textFieldNombre,labelApellido,textFieldApellido,labelUsuario,textFieldUsuario,labelRol,comboRol,labelContrasena,textFieldContrasena, labelConfirmar,textFieldConfirmar, btnCrear, btnCancelar};
 
@@ -73,17 +78,54 @@ public class CrearUsuario extends JFrame implements ActionListener {
 
         btnCrear.addActionListener(this);
         btnCancelar.addActionListener(this);
+        btnBuscarId.addActionListener(this);
 
         //añadiendolos al frame
         container.add(labelTiulo);
+        container.add(labelIdBuscar);
+        container.add(btnBuscarId);
+        container.add(textFieldBuscar);
+
         for (JComponent componente:componentesFormulario) {
             container.add(componente);
         }
 
     }
 
+    public void cargarDatos(String id){
+        String[] datosBusqueda =Usuario.buscarUsuario(id);
+        if (datosBusqueda!= null) {
+            textFieldId.setText(datosBusqueda[0]);
+            textFieldId.setEnabled(false);
+
+            textFieldNombre.setText(datosBusqueda[1]);
+            textFieldApellido.setText(datosBusqueda[2]);
+            textFieldUsuario.setText(datosBusqueda[3]);
+            comboRol.setEnabled(true);
+            if (datosBusqueda[4].equals("3")) {
+                comboRol.setSelectedIndex(1);
+            }else if(datosBusqueda[4].equals("2")) {
+                comboRol.setSelectedIndex(0);
+            }else{
+                comboRol.setEnabled(false);
+            }
+            textFieldContrasena.setText(datosBusqueda[5]);
+            textFieldConfirmar.setText(datosBusqueda[5]);
+        }else{
+            JOptionPane.showMessageDialog(this, "No existe registro", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btnBuscarId) {
+            if (textFieldBuscar.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Debe ingresar un ID", "Aviso", JOptionPane.WARNING_MESSAGE);
+            } else {
+                cargarDatos(textFieldBuscar.getText());
+            }
+        }
+
         if (e.getSource() == btnCrear) {
 
             String id = textFieldId.getText();
@@ -103,12 +145,17 @@ public class CrearUsuario extends JFrame implements ActionListener {
                 }
 
                 if (contrasena.equals(confirmar)) {
-                    Usuario usuarioNuevo = new Usuario(id,nombre,apellido,usuario,tipoRol,contrasena);
 
-                    if (usuarioNuevo.crearUsuario()) {
-                        JOptionPane.showMessageDialog(this, "Usuario creado correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                    if (Usuario.actualizarUsuario(id,nombre,apellido,usuario,tipoRol,contrasena)) {
+                        JOptionPane.showMessageDialog(this, "Usuario modificado correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+
+                        //Borrar textfields
+                        JTextField[] componentesFormulario = {textFieldId,textFieldNombre,textFieldApellido,textFieldUsuario,textFieldConfirmar,textFieldContrasena};
+                        for (JTextField componente: componentesFormulario) {
+                            componente.setText("");
+                        }
                     }else{
-                        JOptionPane.showMessageDialog(this, "Hubo algun error, es posible que ya exista un usuario con dicha ID", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Hubo algun error", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }else{
                     JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden", "Error", JOptionPane.WARNING_MESSAGE);
@@ -117,7 +164,7 @@ public class CrearUsuario extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == btnCancelar) {
-            CrearUsuario.this.setVisible(false);
+            ModificarUsuario.this.setVisible(false);
             PanelAdministrador panelAdministrador = new PanelAdministrador(datosUsuario[0]);
             panelAdministrador.setVisible(true);
         }

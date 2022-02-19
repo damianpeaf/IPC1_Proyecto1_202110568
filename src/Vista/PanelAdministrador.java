@@ -24,7 +24,8 @@ public class PanelAdministrador extends JFrame implements ActionListener {
     JButton btnUsuariosModificar = new JButton("Modificar");
     JButton btnUsuariosEliminar = new JButton("Eliminar");
 
-    JButton btnBibliografiaCrear = new JButton("Crear");
+    JButton btnBibliografiaCrear = new JButton("Carga individual");
+    JButton btnBibliografiaCrear2 = new JButton("Carga masiva");
     JButton btnBibliografiaVer = new JButton("Ver");
     JButton btnBibliografiaModificar = new JButton("Modificar");
     JButton btnBibliografiaEliminar = new JButton("Eliminar");
@@ -108,11 +109,13 @@ public class PanelAdministrador extends JFrame implements ActionListener {
         JPanel panelBibliografia2 = new JPanel();
 
         btnBibliografiaCrear.addActionListener(this);
+        btnBibliografiaCrear2.addActionListener(this);
         btnBibliografiaModificar.addActionListener(this);
         btnBibliografiaEliminar.addActionListener(this);
         btnBibliografiaVer.addActionListener(this);
 
         panelBibliografia1.add(btnBibliografiaCrear);
+        panelBibliografia1.add(btnBibliografiaCrear2);
         panelBibliografia1.add(btnBibliografiaVer);
 
         panelBibliografia2.add(btnBibliografiaModificar);
@@ -142,6 +145,24 @@ public class PanelAdministrador extends JFrame implements ActionListener {
         if (e.getSource() == btnUsuariosCrear) {
             PanelAdministrador.this.setVisible(false);
             CrearUsuario crearUsuario = new CrearUsuario(datosUsuario[0]);
+            crearUsuario.setVisible(true);
+        }
+
+        if (e.getSource() == btnUsuariosEliminar) {
+            PanelAdministrador.this.setVisible(false);
+            EliminarUsuario crearUsuario = new EliminarUsuario(datosUsuario[0]);
+            crearUsuario.setVisible(true);
+        }
+
+        if (e.getSource() == btnUsuariosModificar) {
+            PanelAdministrador.this.setVisible(false);
+            ModificarUsuario crearUsuario = new ModificarUsuario(datosUsuario[0]);
+            crearUsuario.setVisible(true);
+        }
+
+        if (e.getSource() == btnUsuariosVer) {
+            PanelAdministrador.this.setVisible(false);
+            ListarUsuarios crearUsuario = new ListarUsuarios(datosUsuario[0]);
             crearUsuario.setVisible(true);
         }
     }
