@@ -68,10 +68,16 @@ public class Bibliografia {
     }
 
     public boolean crearBibliografiaIndividual(){
-        //validacion existe bibliografia ?
-        String temasFormateados = formatearTemas(this.temas);
-        datos = datos + this.tipo +";"+this.autor+";"+this.titulo+";"+this.descripcion+";"+this.edicion+";"+temasFormateados+";"+this.frecuenciaActual+";"+this.ejemplares+";"+this.area+";"+this.copias+";"+this.disponibles+"\n";
-        return true;
+
+        if (!existeBibliografia(this.titulo)) {
+            //validacion existe bibliografia ?
+            String temasFormateados = formatearTemas(this.temas);
+            datos = datos + this.tipo +";"+this.autor+";"+this.titulo+";"+this.descripcion+";"+this.edicion+";"+temasFormateados+";"+this.frecuenciaActual+";"+this.ejemplares+";"+this.area+";"+this.copias+";"+this.disponibles+"\n";
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
     public static boolean verificarFormato(String datos) {
@@ -80,8 +86,7 @@ public class Bibliografia {
 
     public static boolean crearBibliografiaMasiva(String datosFormateados){
         if (verificarFormato(datosFormateados)) {
-
-            //validacion existe bibliografia ?
+            //validacion existe bibliografia ? ->
             datos = datos + datosFormateados;
             return true;
         }else {
@@ -106,7 +111,7 @@ public class Bibliografia {
         return datosFormateados;
     }
 
-    public static boolean actualizarBibliografia(String tipo, String autor, String titulo, String descripcion, int edicion, String[] temas, String frecuenciaActual, int ejemplares,String area,int copias, int disponibles){
+    public static boolean actualizarBibliografia(String tipo, String autor, String titulo, String descripcion, String edicion, String[] temas, String frecuenciaActual, String ejemplares,String area,String copias, String disponibles){
             if (existeBibliografia(titulo)) {
                 //validación
                 String nuevosDatos="";
@@ -143,6 +148,35 @@ public class Bibliografia {
             }
         }
         datos=nuevosDatos;
+    }
+
+    public static String[] buscarBibliografia(String titulo) {
+
+        String [] datosUsuarioBusqueda = null;
+
+        for (int i = 0; i < datosBibiliografia().length; i++) {
+            if ((datosBibiliografia()[i][2].replace(" ","").equals(titulo))) {
+                datosUsuarioBusqueda = datosBibiliografia()[i];
+            }
+        }
+
+        return datosUsuarioBusqueda;
+
+    }
+
+    public static String disponibilidadBibliografia(String titulo) {
+
+        String datosUsuarioBusqueda=null;
+
+        for (int i = 0; i < datosBibiliografia().length; i++) {
+            if ((datosBibiliografia()[i][2].replace(" ","").equalsIgnoreCase(titulo))) {
+                datosUsuarioBusqueda = datosBibiliografia()[i][10];
+
+            }
+        }
+
+        return datosUsuarioBusqueda;
+
     }
 
     public static String[][] buscarCoincidenciasBibliografia(String coincidenciaDeBusqueda) {
