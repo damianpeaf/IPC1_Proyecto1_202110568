@@ -41,5 +41,8 @@ public class Pruebas {
             System.out.print("\n");
         }
 
+        Reporte reporte = new Reporte();
+        System.out.println(reporte.reportePrestamos());
+
     }
 }

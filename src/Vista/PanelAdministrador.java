@@ -26,8 +26,7 @@ public class PanelAdministrador extends JFrame implements ActionListener {
     JButton btnUsuariosModificar = new JButton("Modificar");
     JButton btnUsuariosEliminar = new JButton("Eliminar");
 
-    JButton btnBibliografiaCrear = new JButton("Carga individual");
-    JButton btnBibliografiaCrear2 = new JButton("Carga masiva");
+    JButton btnBibliografiaCrear = new JButton("Crear");
     JButton btnBibliografiaVer = new JButton("Ver");
     JButton btnBibliografiaModificar = new JButton("Modificar");
     JButton btnBibliografiaEliminar = new JButton("Eliminar");
@@ -113,13 +112,11 @@ public class PanelAdministrador extends JFrame implements ActionListener {
         JPanel panelBibliografia2 = new JPanel();
 
         btnBibliografiaCrear.addActionListener(this);
-        btnBibliografiaCrear2.addActionListener(this);
         btnBibliografiaModificar.addActionListener(this);
         btnBibliografiaEliminar.addActionListener(this);
         btnBibliografiaVer.addActionListener(this);
 
         panelBibliografia1.add(btnBibliografiaCrear);
-        panelBibliografia1.add(btnBibliografiaCrear2);
         panelBibliografia1.add(btnBibliografiaVer);
 
         panelBibliografia2.add(btnBibliografiaModificar);
@@ -169,5 +166,32 @@ public class PanelAdministrador extends JFrame implements ActionListener {
             ListarUsuarios crearUsuario = new ListarUsuarios(datosUsuario[0]);
             crearUsuario.setVisible(true);
         }
+
+        if (e.getSource()==btnBibliografiaCrear){
+            String[] options = {"Carga Masiva", "Carga individual"};
+            int x = JOptionPane.showOptionDialog(this, "¿Forma de carga?","Selecciona una opcion",JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+
+            if (x ==0) {
+                //carga masiva
+                PanelAdministrador.this.setVisible(false);
+                CrearBibliografiaMasiva nuevoPanel = new CrearBibliografiaMasiva(datosUsuario[0]);
+                nuevoPanel.setVisible(true);
+            }else if (x == 1) {
+                //carga individual
+                PanelAdministrador.this.setVisible(false);
+                CrearBibliografiaIndividual nuevoPanel = new CrearBibliografiaIndividual(datosUsuario[0]);
+                nuevoPanel.setVisible(true);
+            }
+
+        }
+
+        if (e.getSource() == btnBibliografiaVer) {
+            PanelAdministrador.this.setVisible(false);
+            ListarBibliografia panel = new ListarBibliografia(datosUsuario[0]);
+            panel.setVisible(true);
+        }
+
+
+
     }
 }

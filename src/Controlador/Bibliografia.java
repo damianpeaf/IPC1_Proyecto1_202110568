@@ -15,15 +15,15 @@ public class Bibliografia {
     private String autor;
     private String titulo;
     private String descripcion;
-    private int edicion;
+    private String edicion;
     private String[] temas;
     private String frecuenciaActual;
-    private int ejemplares;
+    private String ejemplares;
     private String area;
-    private int copias;
-    private int disponibles;
+    private String copias;
+    private String disponibles;
 
-    public Bibliografia(String tipo, String autor, String titulo, String descripcion, int edicion, String[] temas, String frecuenciaActual, int ejemplares,String area,int copias, int disponibles){
+    public Bibliografia(String tipo, String autor, String titulo, String descripcion, String edicion, String[] temas, String frecuenciaActual, String ejemplares,String area,String copias, String disponibles){
         this.tipo = tipo;
         this.autor = autor;
         this.titulo = titulo;
@@ -67,6 +67,7 @@ public class Bibliografia {
         return temasFormateados;
     }
 
+
     public boolean crearBibliografiaIndividual(){
 
         if (!existeBibliografia(this.titulo)) {
@@ -87,7 +88,16 @@ public class Bibliografia {
     public static boolean crearBibliografiaMasiva(String datosFormateados){
         if (verificarFormato(datosFormateados)) {
             //validacion existe bibliografia ? ->
-            datos = datos + datosFormateados;
+
+            String[] datosIndividuales = datosFormateados.split("\n");
+
+            for (int i = 0; i < datosIndividuales.length; i++) {
+                String[] datosFila = datosIndividuales[i].split(";");
+
+                String[] temasFormateados = datosFila[5].split(",");
+                Bibliografia bibliografia = new Bibliografia(datosFila[0],datosFila[1],datosFila[2],datosFila[3],datosFila[4],temasFormateados,datosFila[6], datosFila[7],datosFila[8], datosFila[9],datosFila[10]);
+                bibliografia.crearBibliografiaIndividual();
+            }
             return true;
         }else {
             return false;

@@ -96,6 +96,8 @@ public class Prestamo {
                     datosPrestamoBusqueda[contadorAux]=datosPrestamo()[i];
                 }
             }
+
+            //regresar tipo ?
             return datosPrestamoBusqueda;
         }else{
             return null;

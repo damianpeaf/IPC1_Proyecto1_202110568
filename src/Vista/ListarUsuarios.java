@@ -18,7 +18,6 @@ public class ListarUsuarios extends JFrame implements ActionListener {
         datosUsuario = Usuario.buscarUsuario(id);
         EstilosBase estilosBase = new EstilosBase(this,"Ver Usuario");
 
-
         cargarDatos();
 
         this.setLayout(new BorderLayout());
