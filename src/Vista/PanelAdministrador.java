@@ -3,6 +3,8 @@ package Vista;
 import Controlador.Usuario;
 
 import javax.swing.*;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,15 +36,17 @@ public class PanelAdministrador extends JFrame implements ActionListener {
 
         datosUsuario = Usuario.buscarUsuario(id);
 
+        this.getGlassPane().setBackground(Color.red);
+
         JPanel panel1 = new JPanel();
         JPanel panel2 = new JPanel();
         JPanel panel3 = new JPanel();
         JPanel panel4 = new JPanel();
 
-        panel1.setBorder(BorderFactory.createLineBorder(Color.black));
-        panel2.setBorder(BorderFactory.createLineBorder(Color.black));
-        panel3.setBorder(BorderFactory.createLineBorder(Color.black));
-        panel4.setBorder(BorderFactory.createLineBorder(Color.black));
+        panel1.setBorder(new TitledBorder(new EtchedBorder(), "Biblioteca FIUSAC"));;
+        panel2.setBorder(new TitledBorder(new EtchedBorder(), "Opciones de Administrador"));
+        panel3.setBorder(new TitledBorder(new EtchedBorder(), "Usuarios"));
+        panel4.setBorder(new TitledBorder(new EtchedBorder(), "Bibliografia"));
 
 
         //0->id, 1->nombre, 2->apellido, 3->nombreUsuario, 4->rol, 5->contrasena
@@ -82,7 +86,7 @@ public class PanelAdministrador extends JFrame implements ActionListener {
         //Panel abajo izquierda
         panel3.setLayout(new GridLayout(3,1));
 
-        JLabel labelUsuario = new JLabel("Usuarios");
+        JLabel labelUsuario = new JLabel("");
         JPanel panelUsuarios1 = new JPanel();
         JPanel panelUsuarios2 = new JPanel();
 
@@ -104,7 +108,7 @@ public class PanelAdministrador extends JFrame implements ActionListener {
         //Panel abajo derecha
         panel4.setLayout(new GridLayout(3,1));
 
-        JLabel labelBibliografia = new JLabel("Bibliografia");
+        JLabel labelBibliografia = new JLabel("");
         JPanel panelBibliografia1 = new JPanel();
         JPanel panelBibliografia2 = new JPanel();
 

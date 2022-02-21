@@ -38,6 +38,7 @@ public class Inicio extends JFrame {
         panel1.add(titulo);
         panel1.add(btnLogin);
 
+
         JPanel panel2 = new JPanel();
         panel2.setLayout(new GridLayout(1,2));
         panel2.setBackground(Color.white);
@@ -52,8 +53,6 @@ public class Inicio extends JFrame {
         panel2.add(labelbanner);
 
         panel2.add(vision);
-
-
 
         JPanel panel3 = new JPanel();
         panel3.setBackground(new Color(189, 195, 199));
