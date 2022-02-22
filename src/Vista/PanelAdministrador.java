@@ -35,8 +35,6 @@ public class PanelAdministrador extends JFrame implements ActionListener {
 
         datosUsuario = Usuario.buscarUsuario(id);
 
-        this.getGlassPane().setBackground(Color.red);
-
         JPanel panel1 = new JPanel();
         JPanel panel2 = new JPanel();
         JPanel panel3 = new JPanel();
@@ -191,7 +189,17 @@ public class PanelAdministrador extends JFrame implements ActionListener {
             panel.setVisible(true);
         }
 
+        if (e.getSource() == btnBibliografiaModificar) {
+            PanelAdministrador.this.setVisible(false);
+            ModificarBibliografia panel = new ModificarBibliografia(datosUsuario[0]);
+            panel.setVisible(true);
+        }
 
+        if (e.getSource() == btnBibliografiaEliminar) {
+            PanelAdministrador.this.setVisible(false);
+            EliminarBibliografia panel = new EliminarBibliografia(datosUsuario[0]);
+            panel.setVisible(true);
+        }
 
     }
 }

@@ -8,17 +8,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CrearBibliografiaIndividual extends JFrame implements ActionListener{
+public class ModificarBibliografia extends JFrame implements ActionListener{
 
     String[] datosUsuario;
 
     Container container=getContentPane();
+
+    JTextField textFieldBuscar = new JTextField();
+    JButton btnBuscar = new JButton("Buscar por titulo");
 
     JLabel labelTipo = new JLabel("Tipo");
     JComboBox comboTipo = new JComboBox();
 
     JLabel labelAutor = new JLabel("Autor");
     JTextField textFieldAutor = new JTextField();
+
     JLabel labelTitulo = new JLabel("Titulo");
     JTextField textFieldTitulo = new JTextField();
 
@@ -48,14 +52,14 @@ public class CrearBibliografiaIndividual extends JFrame implements ActionListene
     JTextField textFieldDisponibles = new JTextField();
 
 
-    JButton btnCrear = new JButton("Crear");
+    JButton btnCrear = new JButton("Modificar");
     JButton btnCancelar = new JButton("Regresar");
 
-    public CrearBibliografiaIndividual(String id){
+    public ModificarBibliografia(String id){
 
         datosUsuario = Usuario.buscarUsuario(id);
 
-        EstilosBase estilosBase = new EstilosBase(this,"Crear Bibliografia");
+        EstilosBase estilosBase = new EstilosBase(this,"Modificar Bibliografia");
 
         comboTipo.addItem("Libro");
         comboTipo.addItem("Revista");
@@ -73,7 +77,7 @@ public class CrearBibliografiaIndividual extends JFrame implements ActionListene
 
         labelTitulo.setBounds(centro+anchoCaja,0,anchoCaja,altoCaja);
 
-        JComponent[] componentesFormulario = {labelTipo, comboTipo,labelAutor, textFieldAutor,labelTitulo,textFieldTitulo,labelEdicion,textFieldEdicion,labelDescripcion,textFieldDescripcion,labelTemas,textFieldTemas,labelFrecuencia,textFieldFrecuencia, labelEjemplares, textFieldEjemplares,labelArea,textFieldArea, labelCopias, textFieldCopias,labelDisponibles,textFieldDisponibles, btnCrear, btnCancelar};
+        JComponent[] componentesFormulario = {textFieldBuscar,btnBuscar,labelTipo, comboTipo,labelAutor, textFieldAutor,labelTitulo,textFieldTitulo,labelEdicion,textFieldEdicion,labelDescripcion,textFieldDescripcion,labelTemas,textFieldTemas,labelFrecuencia,textFieldFrecuencia, labelEjemplares, textFieldEjemplares,labelArea,textFieldArea, labelCopias, textFieldCopias,labelDisponibles,textFieldDisponibles, btnCrear, btnCancelar};
 
         int fila =0;
         for (int i = 0; i < componentesFormulario.length; i+=2) {
@@ -91,6 +95,8 @@ public class CrearBibliografiaIndividual extends JFrame implements ActionListene
             container.add(componente);
         }
 
+        btnBuscar.addActionListener(this);
+        textFieldTitulo.setEnabled(false);
         modificarCampos();
 
     }
@@ -98,6 +104,29 @@ public class CrearBibliografiaIndividual extends JFrame implements ActionListene
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        if (e.getSource() == btnBuscar) {
+            String[] datosBusqueda = Bibliografia.buscarBibliografia(textFieldBuscar.getText());
+
+            if (datosBusqueda != null) {
+
+                comboTipo.setSelectedIndex(Integer.parseInt(datosBusqueda[0].replace(" ","")));
+                modificarCampos();
+                textFieldAutor.setText(datosBusqueda[1]);
+                textFieldTitulo.setText(datosBusqueda[2]);
+                textFieldEdicion.setText(datosBusqueda[3]);
+                textFieldDescripcion.setText(datosBusqueda[4]);
+                textFieldTemas.setText(datosBusqueda[5]);
+                textFieldFrecuencia.setText(datosBusqueda[6]);
+                textFieldEjemplares.setText(datosBusqueda[7]);
+                textFieldArea.setText(datosBusqueda[8]);
+                textFieldCopias.setText(datosBusqueda[9]);
+                textFieldDisponibles.setText(datosBusqueda[10]);
+
+            }else{
+                JOptionPane.showMessageDialog(this, "No existe registro", "Aviso", JOptionPane.WARNING_MESSAGE);
+            }
+
+        }
 
         if (e.getSource() == btnCrear) {
 
@@ -120,10 +149,9 @@ public class CrearBibliografiaIndividual extends JFrame implements ActionListene
             }else{
 
                 String[] temasFormateados = temas.split(",");
-                Bibliografia bibliografia = new Bibliografia(tipo, autor, titulo, edicion, descripcion,temasFormateados,frecuencia,ejemplares,area,copias,disponibles);
-
-                if(bibliografia.crearBibliografiaIndividual()){
-                    JOptionPane.showMessageDialog(this, "Bibliografia creada correctamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                Bibliografia.actualizarBibliografia(tipo, autor, titulo, edicion, descripcion,temasFormateados,frecuencia,ejemplares,area,copias,disponibles);
+                if(Bibliografia.actualizarBibliografia(tipo, autor, titulo, edicion, descripcion,temasFormateados,frecuencia,ejemplares,area,copias,disponibles)){
+                    JOptionPane.showMessageDialog(this, "Bibliografia modificada correctamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                 }else{
                     JOptionPane.showMessageDialog(this, "Hubo algun problema", "Error", JOptionPane.WARNING_MESSAGE);
                 }
@@ -137,7 +165,7 @@ public class CrearBibliografiaIndividual extends JFrame implements ActionListene
         }
 
             if (e.getSource() == btnCancelar) {
-            CrearBibliografiaIndividual.this.setVisible(false);
+            ModificarBibliografia.this.setVisible(false);
             PanelAdministrador panelAdministrador = new PanelAdministrador(datosUsuario[0]);
             panelAdministrador.setVisible(true);
         }
@@ -148,7 +176,6 @@ public class CrearBibliografiaIndividual extends JFrame implements ActionListene
 
         //limpia los campos
         textFieldAutor.setText("");
-        textFieldTitulo.setText("");
         textFieldEdicion.setText("");
         textFieldDescripcion.setText("");
         textFieldTemas.setText("");
@@ -160,7 +187,6 @@ public class CrearBibliografiaIndividual extends JFrame implements ActionListene
 
         if (opcionSeleccionada==0){
             textFieldAutor.setEnabled(true);
-            textFieldTitulo.setEnabled(true);
             textFieldEdicion.setEnabled(true);
             textFieldDescripcion.setEnabled(true);
             textFieldTemas.setEnabled(true);
@@ -172,7 +198,6 @@ public class CrearBibliografiaIndividual extends JFrame implements ActionListene
         }else if (opcionSeleccionada == 1) {
             //revista
             textFieldAutor.setEnabled(true);
-            textFieldTitulo.setEnabled(true);
             textFieldEdicion.setEnabled(true);
             textFieldDescripcion.setEnabled(true);
             textFieldTemas.setEnabled(true);
@@ -184,7 +209,6 @@ public class CrearBibliografiaIndividual extends JFrame implements ActionListene
         }else if(opcionSeleccionada == 2){
             //tesis
             textFieldAutor.setEnabled(true);
-            textFieldTitulo.setEnabled(true);
             textFieldEdicion.setEnabled(true);
             textFieldDescripcion.setEnabled(true);
             textFieldTemas.setEnabled(true);

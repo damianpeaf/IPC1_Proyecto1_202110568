@@ -126,7 +126,7 @@ public class Bibliografia {
                 //validación
                 String nuevosDatos="";
                 for (int i = 0; i < datosBibiliografia().length; i++) {
-                    if (!(datosBibiliografia()[i][2].equals(titulo))) {
+                    if (!(datosBibiliografia()[i][2].equalsIgnoreCase(titulo))) {
                         for (int j = 0; j < NUMERO_CAMPOS; j++) {
                             nuevosDatos=nuevosDatos+ datosBibiliografia()[i][j] +";";
                         }
@@ -165,7 +165,7 @@ public class Bibliografia {
         String [] datosUsuarioBusqueda = null;
 
         for (int i = 0; i < datosBibiliografia().length; i++) {
-            if ((datosBibiliografia()[i][2].replace(" ","").equals(titulo))) {
+            if ((datosBibiliografia()[i][2].replace(" ","").equalsIgnoreCase(titulo))) {
                 datosUsuarioBusqueda = datosBibiliografia()[i];
             }
         }
