@@ -1,6 +1,7 @@
 package Vista;
 
 import Controlador.Bibliografia;
+import Controlador.Prestamo;
 import Controlador.Usuario;
 
 import javax.swing.*;
@@ -24,7 +25,8 @@ public class PanelUsuario extends JFrame implements ActionListener, MouseListene
     JButton btnBuscarBibliografia = new JButton("Buscar bibliografia");
     JButton btnPrestarBibliografia = new JButton("prestar");
     JTextField textFieldBuscar = new JTextField();
-    JLabel labelDatosSeleccionados = new JLabel("Datos seleccionados:                           ");
+    JLabel labelDatosSeleccionadosTitulo = new JLabel("Datos seleccionado:");
+    JLabel labelDatosSeleccionados = new JLabel("");
 
     JTable tablaBibliografias = new JTable();
 
@@ -86,13 +88,19 @@ public class PanelUsuario extends JFrame implements ActionListener, MouseListene
         JPanel panelBusqueda = new JPanel();
         panelBusqueda.setLayout(new GridLayout(1,2));
 
+
         panelBusqueda.add(textFieldBuscar);
         panelBusqueda.add(btnBuscarBibliografia);
 
+        //NOTA: AÑADIR LISTENER PARA CUANDO ESCRIBA EN EL TEXTFIELD ???
+        btnBuscarBibliografia.addActionListener(this);
+
         JPanel panelInformacionBusqueda = new JPanel();
-        panelInformacionBusqueda.setLayout(new GridLayout(1,2));
+        panelInformacionBusqueda.setLayout(new GridLayout(1,3));
+        panelInformacionBusqueda.add(labelDatosSeleccionadosTitulo);
         panelInformacionBusqueda.add(labelDatosSeleccionados);
         panelInformacionBusqueda.add(btnPrestarBibliografia);
+        btnPrestarBibliografia.addActionListener(this);
 
         //panel tabla
         JPanel panelTabla = new JPanel();
@@ -123,11 +131,55 @@ public class PanelUsuario extends JFrame implements ActionListener, MouseListene
             login.setVisible(true);
             JOptionPane.showMessageDialog(login, "Hasta pronto", "LogOut",JOptionPane.INFORMATION_MESSAGE);
         }
+
+        if (e.getSource() == btnBuscarBibliografia) {
+            cargarDatos();
+        }
+        if (e.getSource()==btnPrestarBibliografia){
+            if (!labelDatosSeleccionados.getText().equals("")){
+                String[] options = {"Si", "No"};
+                int opcionElegida = JOptionPane.showOptionDialog(this, "Confirmar","Selecciona una opcion",JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+
+                if (opcionElegida==0) {
+                    //si
+                    Prestamo prestamo = new Prestamo(labelDatosSeleccionados.getText(),datosUsuario[0]);
+                    JOptionPane.showMessageDialog(this, prestamo.crearPrestamo(), "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    cargarDatos();
+                }
+            }else {
+                JOptionPane.showMessageDialog(this, "Debe seleccionar un titulo para prestar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
+
+    void generarModelo(DefaultTableModel modeloTabla,String [][] datosCargar){
+        if (datosCargar != null) {
+            if (datosCargar[0][0] != null) {
+
+                for (String[] dato : datosCargar) {
+                    String tipo = "";
+                    if (dato[0].equals("0")) {
+                        tipo = "Libro";
+                    } else if (dato[0].equals("1")) {
+                        tipo = "Revista";
+                    } else if (dato[0].equals("2")) {
+                        tipo = "Tesis";
+                    }
+                    modeloTabla.addRow(new Object[]{tipo, dato[1], dato[2], dato[3], dato[4], dato[5], dato[6], dato[7], dato[8], dato[9], dato[10]});
+                }
+            }
+        }else {
+            JOptionPane.showMessageDialog(this, "Información no encontrada", "Exito", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     void cargarDatos() {
+
+        //reinicia el modelo
+        tablaBibliografias.setModel(new DefaultTableModel());
         DefaultTableModel modeloTabla = new DefaultTableModel();
 
+        modeloTabla.setRowCount(0);
         modeloTabla.addColumn("Tipo");
         modeloTabla.addColumn("Autor");
         modeloTabla.addColumn("Titulo");
@@ -140,18 +192,10 @@ public class PanelUsuario extends JFrame implements ActionListener, MouseListene
         modeloTabla.addColumn("Copias");
         modeloTabla.addColumn("Disponibles");
 
-        if (Bibliografia.datosBibiliografia()[0][0] != null) {
-            for (String[] dato : Bibliografia.datosBibiliografia()) {
-                String tipo = "";
-                if (dato[0].equals("0")) {
-                    tipo = "Libro";
-                } else if (dato[0].equals("1")) {
-                    tipo = "Revista";
-                } else if (dato[0].equals("2")) {
-                    tipo = "Tesis";
-                }
-                modeloTabla.addRow(new Object[]{tipo, dato[1], dato[2], dato[3], dato[4], dato[5], dato[6], dato[7], dato[8], dato[9], dato[10]});
-            }
+        if (!textFieldBuscar.getText().equals("")) {
+            generarModelo(modeloTabla,Bibliografia.buscarCoincidenciasBibliografia(textFieldBuscar.getText()));
+        }else{
+            generarModelo(modeloTabla,Bibliografia.datosBibiliografia());
         }
 
         tablaBibliografias.setModel(modeloTabla);
@@ -163,7 +207,7 @@ public class PanelUsuario extends JFrame implements ActionListener, MouseListene
             final int fila = tablaBibliografias.getSelectedRow();
             final String titulo = (String)tablaBibliografias.getValueAt(fila, 2);
 
-            labelDatosSeleccionados.setText("Datos seleccionados: "+titulo);
+            labelDatosSeleccionados.setText(titulo);
         }
     }
 

@@ -54,7 +54,7 @@ public class Prestamo {
                 nuevaDisponibilidad = disponibles - 1;
 
             }
-            return Bibliografia.actualizarBibliografia(tipo, autor, titulo, descripcion, edicion, temas, frecuenciaActual, ejemplares, areas, copias, disponibles+"");
+            return Bibliografia.actualizarBibliografia(tipo, autor, titulo, descripcion, edicion, temas, frecuenciaActual, ejemplares, areas, copias, nuevaDisponibilidad+"");
     }
 
     public String crearPrestamo(){
@@ -135,8 +135,8 @@ public class Prestamo {
 
     private boolean existeDisponibilidad(String titulo){
 
-        int disposibles = Integer.parseInt(Bibliografia.disponibilidadBibliografia(titulo).replace(" ",""));
-        if (disposibles>1) {
+        int disposibles = Integer.parseInt(Bibliografia.disponibilidadBibliografia(titulo));
+        if (disposibles>=1) {
             return true;
         }else{
             return false;

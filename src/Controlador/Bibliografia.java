@@ -1,5 +1,7 @@
 package Controlador;
 
+import java.util.Locale;
+
 public class Bibliografia {
 
     //Datos requeridos
@@ -26,15 +28,15 @@ public class Bibliografia {
     public Bibliografia(String tipo, String autor, String titulo, String descripcion, String edicion, String[] temas, String frecuenciaActual, String ejemplares,String area,String copias, String disponibles){
         this.tipo = tipo;
         this.autor = autor;
-        this.titulo = titulo;
+        this.titulo = titulo.trim(); //pequeño formato
         this.descripcion = descripcion;
         this.edicion = edicion;
         this.temas = temas;
         this.frecuenciaActual = frecuenciaActual;
-        this.ejemplares = ejemplares;
+        this.ejemplares = ejemplares.trim();
         this.area = area;
-        this.copias = copias;
-        this.disponibles = disponibles;
+        this.copias = copias.trim();
+        this.disponibles = disponibles.trim();
 
     }
 
@@ -194,11 +196,9 @@ public class Bibliografia {
         //Contar coincidencias
         int coincidencias = 0;
         for (int i = 0; i < datosBibiliografia().length; i++) {
-            for (int j = 0; j < NUMERO_CAMPOS; j++) {
-                if ((datosBibiliografia()[i][j].equals(coincidenciaDeBusqueda))) {
-                    coincidencias++;
-                    break;
-                }
+            //verificar si contiene el tema
+            if (datosBibiliografia()[i][5].toLowerCase().contains(coincidenciaDeBusqueda.toLowerCase())) {
+                coincidencias++;
             }
         }
 
@@ -207,12 +207,9 @@ public class Bibliografia {
             int contadorAux =0;
 
             for (int i = 0; i < datosBibiliografia().length; i++) {
-                for (int j = 0; j < NUMERO_CAMPOS; j++) {
-                    if ((datosBibiliografia()[i][j].equals(coincidenciaDeBusqueda))) {
-                        datosUsuarioBusqueda[contadorAux] =datosBibiliografia()[i];
-                        contadorAux++;
-                        break;
-                    }
+                if (datosBibiliografia()[i][5].toLowerCase().contains(coincidenciaDeBusqueda.toLowerCase())) {
+                    datosUsuarioBusqueda[contadorAux] =datosBibiliografia()[i];
+                    contadorAux++;
                 }
             }
 
