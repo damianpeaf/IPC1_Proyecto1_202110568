@@ -1,7 +1,7 @@
 package Vista;
 
 import Controlador.Bibliografia;
-import Controlador.Prestamo;
+import Controlador.Reporte;
 import Controlador.Usuario;
 
 import javax.swing.*;
@@ -9,29 +9,30 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CrearBibliografiaMasiva extends JFrame implements ActionListener {
+public class GenerarReporte extends JFrame implements ActionListener {
 
     String[] datosUsuario;
-    JLabel labelTitulo = new JLabel("Carga masiva");
+    JLabel labelTitulo = new JLabel("Reporte");
     JTextArea areaTexto = new JTextArea();
     JButton btnCancelar = new JButton("Regresar");
-    JButton btnCrear = new JButton("Cargar");
     JLabel separador1 = new JLabel("  ");
     JLabel separador2 = new JLabel("  ");
 
-    public CrearBibliografiaMasiva(String id){
+    //reportes
+    //1 -> usuarios
+    //2 -> bibilio
+    //3 -> prestamos
+    public GenerarReporte(String id, int tipo){
+        cargarReporte(tipo);
         datosUsuario = Usuario.buscarUsuario(id);
-        EstilosBase estilosBase = new EstilosBase(this,"Crear Bibliografia");
+        EstilosBase estilosBase = new EstilosBase(this,"Reporte");
 
         this.setLayout(new BorderLayout());
 
         JPanel panelBotones = new JPanel();
-        panelBotones.setLayout(new GridLayout(1,2));
+        panelBotones.setLayout(new GridLayout(1,1));
 
         btnCancelar.addActionListener(this);
-        btnCrear.addActionListener(this);
-
-        panelBotones.add(btnCrear);
         panelBotones.add(btnCancelar);
 
         JScrollPane scrollTabla = new JScrollPane(areaTexto);
@@ -43,21 +44,25 @@ public class CrearBibliografiaMasiva extends JFrame implements ActionListener {
         this.add(panelBotones,BorderLayout.SOUTH);
     }
 
+    private void cargarReporte(int tipo){
+        Reporte reporte = new Reporte();
+        if (tipo == 1) {
+            areaTexto.setText(reporte.reporteUsuarios());
+        }else if (tipo == 2) {
+            areaTexto.setText(reporte.reporteBibliografias());
+        }else if (tipo == 3) {
+            areaTexto.setText(reporte.reportePrestamos());
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnCancelar) {
-            CrearBibliografiaMasiva.this.setVisible(false);
+            GenerarReporte.this.setVisible(false);
             PanelAdministrador panelAdministrador = new PanelAdministrador(datosUsuario[0]);
             panelAdministrador.setVisible(true);
         }
 
-        if (e.getSource() == btnCrear) {
-            if (Bibliografia.crearBibliografiaMasiva(areaTexto.getText())){
-                JOptionPane.showMessageDialog(this, "Bibliografia creada correctamente", "Aviso",JOptionPane.INFORMATION_MESSAGE);
 
-            }else{
-                JOptionPane.showMessageDialog(this, "Hubo algun error", "Aviso",JOptionPane.ERROR_MESSAGE);
-            }
-        }
     }
 }

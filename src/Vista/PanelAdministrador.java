@@ -201,5 +201,27 @@ public class PanelAdministrador extends JFrame implements ActionListener {
             panel.setVisible(true);
         }
 
+
+        //reportes
+        //1 -> usuarios
+        //2 -> bibilio
+        //3 -> prestamos
+        if (e.getSource() == btnReporteUsuarios) {
+            PanelAdministrador.this.setVisible(false);
+            GenerarReporte panel = new GenerarReporte(datosUsuario[0],1);
+            panel.setVisible(true);
+        }
+        if (e.getSource() == btnReporteBibliografia) {
+            PanelAdministrador.this.setVisible(false);
+            GenerarReporte panel = new GenerarReporte(datosUsuario[0],2);
+            panel.setVisible(true);
+        }
+
+        if (e.getSource() == btnReportePrestamos) {
+            PanelAdministrador.this.setVisible(false);
+            GenerarReporte panel = new GenerarReporte(datosUsuario[0],3);
+            panel.setVisible(true);
+        }
+
     }
 }

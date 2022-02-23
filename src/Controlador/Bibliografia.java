@@ -27,14 +27,14 @@ public class Bibliografia {
 
     public Bibliografia(String tipo, String autor, String titulo, String descripcion, String edicion, String[] temas, String frecuenciaActual, String ejemplares,String area,String copias, String disponibles){
         this.tipo = tipo;
-        this.autor = autor;
+        this.autor = autor.trim();
         this.titulo = titulo.trim(); //pequeño formato
-        this.descripcion = descripcion;
-        this.edicion = edicion;
+        this.descripcion = descripcion.trim();
+        this.edicion = edicion.trim();
         this.temas = temas;
-        this.frecuenciaActual = frecuenciaActual;
+        this.frecuenciaActual = frecuenciaActual.trim();
         this.ejemplares = ejemplares.trim();
-        this.area = area;
+        this.area = area.trim();
         this.copias = copias.trim();
         this.disponibles = disponibles.trim();
 
