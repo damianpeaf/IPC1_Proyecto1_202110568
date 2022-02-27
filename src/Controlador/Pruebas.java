@@ -16,20 +16,17 @@ public class Pruebas {
                 "1; Autor1; Titulo4; Descripcion1; 2; tema4, tema2; ; ; Ingeniería; 10; 2\n";
 
         Bibliografia.crearBibliografiaMasiva(cargaMasiva);
+        Usuario usuario2 = new Usuario("2","nombre1", "apelledo", "usuario", "1", "1");
+        usuario2.crearUsuario();
+
+        Prestamo prestamo = new Prestamo("Titulo1", "2");
+        prestamo.crearPrestamo();
+
+        Prestamo prestamo2 = new Prestamo("Titulo2", "2");
+        prestamo2.crearPrestamo();
 
 
         System.out.println(Bibliografia.buscarCoincidenciasBibliografia("tema3")[0][2]);
-
-
-        Usuario usuario2 = new Usuario("1","administrador", "administrador", "administrador", "0", "password");
-
-        Prestamo prestamo = new Prestamo("Titulo1", "1");
-        prestamo.crearPrestamo();
-
-        Prestamo prestamo2 = new Prestamo("Titulo2", "1");
-        prestamo2.crearPrestamo();
-
-        Prestamo.devolverPrestamo("1");
 
         String [][] datosPrestamo = Prestamo.listarPrestamoNoDevueltos("1");
 
@@ -40,8 +37,9 @@ public class Pruebas {
             System.out.print("\n");
         }
 
+
         Reporte reporte = new Reporte();
-        System.out.println(reporte.reporteBibliografias());
+        System.out.println(reporte.reporteUsuarios());
 
     }
 }

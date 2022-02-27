@@ -42,7 +42,7 @@ public class Biblioteca {
 
         Bibliografia.crearBibliografiaMasiva(cargaMasiva);
 
-        Usuario usuario2 = new Usuario("2","nombre1", "apelledo", "usuario", "1", "1");
+        Usuario usuario2 = new Usuario("2","Damian", "Peña", "damian", "2", "123");
         usuario2.crearUsuario();
 
         Prestamo prestamo = new Prestamo("Titulo1", "2");
@@ -51,8 +51,8 @@ public class Biblioteca {
         Prestamo prestamo2 = new Prestamo("Titulo2", "2");
         prestamo2.crearPrestamo();
 
-        PanelAdministrador panelAdministrador = new PanelAdministrador("1");
-        //PanelUsuario panelAdministrador = new PanelUsuario("1");
+        //PanelAdministrador panelAdministrador = new PanelAdministrador("1");
+        PanelUsuario panelAdministrador = new PanelUsuario("2");
         panelAdministrador.setVisible(true);
     }
 }

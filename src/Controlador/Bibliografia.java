@@ -197,7 +197,7 @@ public class Bibliografia {
         int coincidencias = 0;
         for (int i = 0; i < datosBibiliografia().length; i++) {
             //verificar si contiene el tema
-            if (datosBibiliografia()[i][5].toLowerCase().contains(coincidenciaDeBusqueda.toLowerCase())) {
+            if (datosBibiliografia()[i][5].equalsIgnoreCase(coincidenciaDeBusqueda)) {
                 coincidencias++;
             }
         }

@@ -83,7 +83,7 @@ public class Prestamo {
 
         int datosDisponibles = 0;
         for (int i = 0; i < datosPrestamo().length; i++) {
-            if ((datosPrestamo()[i][4].equals(idUsuario)) && (datosPrestamo()[i][3].equals("1"))) {
+            if ((datosPrestamo()[i][4].equals(idUsuario)) && (datosPrestamo()[i][3].equals("0"))) {
                 datosDisponibles++;
             }
         }
@@ -92,7 +92,7 @@ public class Prestamo {
             String [][] datosPrestamoBusqueda = new String [datosDisponibles][4];
             int contadorAux = 0;
             for (int i = 0; i < datosPrestamo().length; i++) {
-                if ((datosPrestamo()[i][4].equals(idUsuario)) && (datosPrestamo()[i][3].equals("1"))) {
+                if ((datosPrestamo()[i][4].equals(idUsuario)) && (datosPrestamo()[i][3].equals("0"))) {
                     datosPrestamoBusqueda[contadorAux]=datosPrestamo()[i];
                 }
             }
@@ -104,12 +104,41 @@ public class Prestamo {
         }
     }
 
+    public static String[][] listarPrestamos(String idUsuario) {
 
-    public static void devolverPrestamo(String idPrestamo){
+        //Contar prestamos asociados
+        int coincidencias = 0;
+        for (int i = 0; i < datosPrestamo().length; i++) {
+            //verificar si contiene el tema
+            if (datosPrestamo()[i][4].equalsIgnoreCase(idUsuario)) {
+                coincidencias++;
+            }
+        }
+
+        if (coincidencias>0) {
+            String [][] datosPrestamoBusqueda = new String[coincidencias][NUMERO_CAMPOS];
+            int contadorAux =0;
+
+            for (int i = 0; i < datosPrestamo().length; i++) {
+                if (datosPrestamo()[i][4].equalsIgnoreCase(idUsuario)) {
+                    datosPrestamoBusqueda[contadorAux] =datosPrestamo()[i];
+                    contadorAux++;
+                }
+            }
+
+            return datosPrestamoBusqueda;
+        }else{
+            return null;
+        }
+
+    }
+
+
+    public static String devolverPrestamo(String idPrestamo){
         String [] datosUsuarioBusqueda = null;
 
         for (int i = 0; i < datosPrestamo().length; i++) {
-            if ((datosPrestamo()[i][0].equals(idPrestamo))) {
+            if ((datosPrestamo()[i][0].equals(idPrestamo)) && (datosPrestamo()[i][3].equals("0"))) {
                 datosUsuarioBusqueda = datosPrestamo()[i];
             }
         }
@@ -128,8 +157,10 @@ public class Prestamo {
                     modificarDisponiblidad(datosUsuarioBusqueda[1],true);
                 }
             }
-
             datos=nuevosDatos;
+            return "Biliografia devuelta correctamente";
+        }else{
+            return "Biliografia devuelta previamente";
         }
     }
 

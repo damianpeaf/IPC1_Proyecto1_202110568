@@ -132,6 +132,12 @@ public class PanelUsuario extends JFrame implements ActionListener, MouseListene
             JOptionPane.showMessageDialog(login, "Hasta pronto", "LogOut",JOptionPane.INFORMATION_MESSAGE);
         }
 
+        if (e.getSource() == btnVerPrestamos) {
+            PanelUsuario.this.setVisible(false);
+            ListarPrestamos frame = new ListarPrestamos(datosUsuario[0]);
+            frame.setVisible(true);
+        }
+
         if (e.getSource() == btnBuscarBibliografia) {
             cargarDatos();
         }
