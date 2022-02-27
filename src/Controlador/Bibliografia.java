@@ -197,8 +197,11 @@ public class Bibliografia {
         int coincidencias = 0;
         for (int i = 0; i < datosBibiliografia().length; i++) {
             //verificar si contiene el tema
-            if (datosBibiliografia()[i][5].equalsIgnoreCase(coincidenciaDeBusqueda)) {
-                coincidencias++;
+            String [] temas = datosBibiliografia()[i][5].split(",");
+            for (int j = 0; j < temas.length; j++) {
+                if (temas[j].trim().equalsIgnoreCase(coincidenciaDeBusqueda)) {
+                    coincidencias++;
+                }
             }
         }
 
@@ -207,10 +210,14 @@ public class Bibliografia {
             int contadorAux =0;
 
             for (int i = 0; i < datosBibiliografia().length; i++) {
-                if (datosBibiliografia()[i][5].toLowerCase().contains(coincidenciaDeBusqueda.toLowerCase())) {
-                    datosUsuarioBusqueda[contadorAux] =datosBibiliografia()[i];
-                    contadorAux++;
+                String [] temas = datosBibiliografia()[i][5].split(",");
+                for (int j = 0; j < temas.length; j++) {
+                    if (temas[j].trim().equalsIgnoreCase(coincidenciaDeBusqueda)) {
+                        datosUsuarioBusqueda[contadorAux] =datosBibiliografia()[i];
+                        contadorAux++;
+                    }
                 }
+
             }
 
             return datosUsuarioBusqueda;
