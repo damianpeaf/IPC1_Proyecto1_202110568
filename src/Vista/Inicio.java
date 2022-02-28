@@ -44,7 +44,7 @@ public class Inicio extends JFrame {
         panel2.setBackground(Color.white);
 
 
-        ImageIcon banner = new ImageIcon(new ImageIcon("logo.png").getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
+        ImageIcon banner = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("logo.png")).getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT));
 
         JLabel labelbanner = new JLabel(banner);
 

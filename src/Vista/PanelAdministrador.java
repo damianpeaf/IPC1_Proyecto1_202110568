@@ -52,7 +52,7 @@ public class PanelAdministrador extends JFrame implements ActionListener {
         this.setLayout(new GridLayout(2,2));
 
         //Panel arriba izq
-        ImageIcon banner = new ImageIcon(new ImageIcon("banner.png").getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT));
+        ImageIcon banner = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("banner.png")).getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT));
         JLabel imagenBanner = new JLabel(banner);
         panel1.add(imagenBanner);
 

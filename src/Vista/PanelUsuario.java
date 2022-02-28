@@ -45,7 +45,7 @@ public class PanelUsuario extends JFrame implements ActionListener, MouseListene
         panel3.setBorder(new TitledBorder(new EtchedBorder(), "Bibliografias"));
 
         //panel arriba
-        ImageIcon banner = new ImageIcon(new ImageIcon("banner.png").getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT));
+        ImageIcon banner = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("banner.png")).getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT));
         JLabel imagenBanner = new JLabel(banner);
         panel1.add(imagenBanner);
 

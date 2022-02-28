@@ -16,7 +16,7 @@ public class EstilosBase extends JFrame {
         frame.setSize(tamanoPantalla.width *3/4,tamanoPantalla.height*3/4);
         frame.setLocation(tamanoPantalla.width/8, tamanoPantalla.height/8);
 
-        ImageIcon logo = new ImageIcon("logo.png");
+        ImageIcon logo = new ImageIcon(getClass().getClassLoader().getResource("logo.png"));
         frame.setIconImage(logo.getImage());
 
         Dimension tamanoVentana = this.getSize();
