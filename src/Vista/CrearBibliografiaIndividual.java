@@ -120,7 +120,7 @@ public class CrearBibliografiaIndividual extends JFrame implements ActionListene
             }else{
 
                 String[] temasFormateados = temas.split(",");
-                Bibliografia bibliografia = new Bibliografia(tipo, autor, titulo, edicion, descripcion,temasFormateados,frecuencia,ejemplares,area,copias,disponibles);
+                Bibliografia bibliografia = new Bibliografia(tipo, autor, titulo, descripcion,edicion,temasFormateados,frecuencia,ejemplares,area,copias,disponibles);
 
                 if(bibliografia.crearBibliografiaIndividual()){
                     JOptionPane.showMessageDialog(this, "Bibliografia creada correctamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);

@@ -113,8 +113,8 @@ public class ModificarBibliografia extends JFrame implements ActionListener{
                 modificarCampos();
                 textFieldAutor.setText(datosBusqueda[1]);
                 textFieldTitulo.setText(datosBusqueda[2]);
-                textFieldEdicion.setText(datosBusqueda[3]);
-                textFieldDescripcion.setText(datosBusqueda[4]);
+                textFieldDescripcion.setText(datosBusqueda[3]);
+                textFieldEdicion.setText(datosBusqueda[4]);
                 textFieldTemas.setText(datosBusqueda[5]);
                 textFieldFrecuencia.setText(datosBusqueda[6]);
                 textFieldEjemplares.setText(datosBusqueda[7]);

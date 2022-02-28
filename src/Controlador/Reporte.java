@@ -23,11 +23,11 @@ public class Reporte {
             datosReporteFormateados[i][3]=datosUsuarios[i][3];
             String numeroRol =datosUsuarios[i][4];
 
-            if (numeroRol.equals("0")) {
+            if (numeroRol.equals("1")) {
                 datosReporteFormateados[i][4]="Administrador";
-            }else if (numeroRol.equals("1")) {
-                datosReporteFormateados[i][4]="Estudiante";
             }else if (numeroRol.equals("2")) {
+                datosReporteFormateados[i][4]="Estudiante";
+            }else if (numeroRol.equals("3")) {
                 datosReporteFormateados[i][4]="Catedratico";
             }
 

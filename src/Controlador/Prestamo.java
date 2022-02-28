@@ -45,7 +45,7 @@ public class Prestamo {
             String ejemplares = datosBibliografia[7];
             String areas = datosBibliografia[8];
             String copias = datosBibliografia[9];
-            int disponibles = Integer.parseInt(datosBibliografia[10].replace(" ",""));
+            int disponibles = Integer.parseInt(datosBibliografia[10].trim());
 
             int nuevaDisponibilidad;
             if (aumentar) {

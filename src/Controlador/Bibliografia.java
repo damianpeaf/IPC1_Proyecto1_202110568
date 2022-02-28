@@ -167,7 +167,7 @@ public class Bibliografia {
         String [] datosUsuarioBusqueda = null;
 
         for (int i = 0; i < datosBibiliografia().length; i++) {
-            if ((datosBibiliografia()[i][2].replace(" ","").equalsIgnoreCase(titulo))) {
+            if ((datosBibiliografia()[i][2].trim().equalsIgnoreCase(titulo))) {
                 datosUsuarioBusqueda = datosBibiliografia()[i];
             }
         }
@@ -181,7 +181,7 @@ public class Bibliografia {
         String datosUsuarioBusqueda=null;
 
         for (int i = 0; i < datosBibiliografia().length; i++) {
-            if ((datosBibiliografia()[i][2].replace(" ","").equalsIgnoreCase(titulo))) {
+            if ((datosBibiliografia()[i][2].trim().equalsIgnoreCase(titulo))) {
                 datosUsuarioBusqueda = datosBibiliografia()[i][10];
 
             }
