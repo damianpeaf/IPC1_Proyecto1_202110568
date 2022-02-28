@@ -74,6 +74,7 @@ public class ListarPrestamos extends JFrame implements ActionListener, MouseList
 
         String [][] datosPrestamo = Prestamo.listarPrestamos(id);
 
+
         if (datosPrestamo != null) {
             if (datosPrestamo[0] != null) {
                 for (String[] dato: datosPrestamo) {

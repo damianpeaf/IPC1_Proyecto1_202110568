@@ -166,6 +166,10 @@ public class Bibliografia {
 
         String [] datosUsuarioBusqueda = null;
 
+        if (datosBibiliografia()[0][0] == null) {
+            return null;
+        }
+
         for (int i = 0; i < datosBibiliografia().length; i++) {
             if ((datosBibiliografia()[i][2].trim().equalsIgnoreCase(titulo))) {
                 datosUsuarioBusqueda = datosBibiliografia()[i];

@@ -70,6 +70,10 @@ public class Reporte {
             datosFormateados[contadorAux][1]=datosPrestamo[i][4];
             datosFormateados[contadorAux][2]=datosPrestamo[i][1];
 
+            if (Bibliografia.buscarBibliografia(datosPrestamo[i][1]) == null) {
+                return "";
+            }
+
             String numeroTipo = Bibliografia.buscarBibliografia(datosPrestamo[i][1])[0];
 
             if (numeroTipo.equals("0")) {
@@ -108,6 +112,10 @@ public class Reporte {
         String[][] datosBibliografia = Bibliografia.datosBibiliografia();
 
         //Temas disponibles/registrados
+
+        if (datosBibliografia[0][0] == null) {
+            return "";
+        }
 
         String temasSeparadosPorComas = "";
         for (int i = 0; i < datosBibliografia.length; i++) {

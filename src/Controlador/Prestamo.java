@@ -80,13 +80,16 @@ public class Prestamo {
 
     public static String[][] listarPrestamoNoDevueltos(String idUsuario){
         //String[] datosUsuario = Usuario.buscarUsuario(idUsuario);
-
         int datosDisponibles = 0;
-        for (int i = 0; i < datosPrestamo().length; i++) {
-            if ((datosPrestamo()[i][4].equals(idUsuario)) && (datosPrestamo()[i][3].equals("0"))) {
-                datosDisponibles++;
+
+        if (datosPrestamo()[0][0] != null) {
+            for (int i = 0; i < datosPrestamo().length; i++) {
+                if ((datosPrestamo()[i][4].equals(idUsuario)) && (datosPrestamo()[i][3].equals("0"))) {
+                    datosDisponibles++;
+                }
             }
         }
+
 
         if (datosDisponibles>0) {
             String [][] datosPrestamoBusqueda = new String [datosDisponibles][4];
@@ -105,6 +108,10 @@ public class Prestamo {
     }
 
     public static String[][] listarPrestamos(String idUsuario) {
+
+        if (datosPrestamo()[0][0] == null) {
+            return null;
+        }
 
         //Contar prestamos asociados
         int coincidencias = 0;
