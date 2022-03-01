@@ -3,7 +3,7 @@ package Controlador;
 public class Reporte {
 
     private String encabezado = "";
-    private String pie = "\n </body>\n" +
+    private String pie = "\n</body>\n" +
                          "</html>";
 
     public String reporteUsuarios(){
@@ -105,7 +105,7 @@ public class Reporte {
 
         String reporte="";
 
-        crearEncabezado("Reporte de usuarios");
+        crearEncabezado("Reporte de bibliografia");
         reporte = reporte + encabezado;
 
         String [] encabezados = {"Tema","Bibliografias asociadas"};
@@ -181,7 +181,7 @@ public class Reporte {
     }
 
         private String crearTabla(String [] encabezados, String[][] datosCuerpo){
-        String tabla ="\n<table border='1'>";
+        String tabla ="\n<table>";
 
 
         //Encabezados
@@ -212,12 +212,56 @@ public class Reporte {
         encabezado =    "<!DOCTYPE html>\n" +
                         "<html lang=\"es\">\n" +
                         "<head>\n" +
-                        "    <meta charset=\"UTF-8\">\n" +
-                        "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n" +
-                        "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
-                        "    <title>"+titulo+"</title>\n" +
+                        "\t<meta charset=\"UTF-8\">\n" +
+                        "\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n" +
+                        "\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+                        "\t<title>"+titulo+"</title>\n" +
+                        "\t<!-- Fuentes de google -->\n" +
+                        "\t<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n" +
+                        "\t<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n" +
+                        "\t<link href=\"https://fonts.googleapis.com/css2?family=Fredoka:wght@300&display=swap\" rel=\"stylesheet\">\n" +
+                        "\t<style>\n" +
+                        "\t\tbody {\n" +
+                        "\t\t\tdisplay: flex;\n" +
+                        "\t\t\tflex-direction: column;\n" +
+                        "\t\t\tbackground-color: rgb(32, 39, 58);\n" +
+                        "\t\t\tmin-height: 100vh;\n" +
+                        "\t\t\tfont-family: 'Fredoka', sans-serif;\n" +
+                        "\t\t}\n" +
+                        "\n" +
+                        "\t\th1 {\n" +
+                        "\t\t\tcolor: rgba(236, 238, 71);\n" +
+                        "\t\t\ttext-align: center;\n" +
+                        "\t\t}\n" +
+                        "\n" +
+                        "\t\ttable {\n" +
+                        "\t\t\tbackground-color: rgb(32, 39, 58);\n" +
+                        "\t\t\tborder-collapse: collapse;\n" +
+                        "\t\t\tcolor: rgb(165, 165, 165);\n" +
+                        "\t\t}\n" +
+                        "\n" +
+                        "\t\ttd {\n" +
+                        "\t\t\tbackground-color: rgb(50, 61, 79);\n" +
+                        "\t\t\tborder: 2px solid rgb(32, 39, 58);\n" +
+                        "\t\t\tmargin: 0;\n" +
+                        "\t\t\tpadding: 1rem;\n" +
+                        "\t\t\ttext-align: center;\n" +
+                        "\t\t}\n" +
+                        "\n" +
+                        "\t\tth {\n" +
+                        "\t\t\tborder-bottom: 2px solid rgb(30, 46, 112);\n" +
+                        "\t\t\tcolor: rgb(63, 156, 193);\n" +
+                        "\t\t\tpadding-bottom: 0.5rem;\n" +
+                        "\t\t}\n" +
+                        "\n" +
+                        "\n" +
+                        "\t\ttr:nth-child(odd) td {\n" +
+                        "\t\t\tbackground-color: rgb(45, 52, 71);\n" +
+                        "\t\t}\n" +
+                        "\t</style>"+
                         "</head>\n" +
-                        "<body>";
+                        "<body>\n"+
+                        "<h1>"+titulo+"</h1>";
     }
 
 }
