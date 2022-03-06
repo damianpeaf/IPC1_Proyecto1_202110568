@@ -31,7 +31,6 @@ public class Usuario {
         //validacion
         if (!existeUsuario(id)) {
             datos = datos + this.id +";"+this.nombre+";"+this.apellido+";"+this.nombreUsuario+";"+this.rol+";"+this.contrasena+"\n";
-            System.out.println("Usuario creado: "+ this.id +";"+this.nombre+";"+this.apellido+";"+this.nombreUsuario+";"+this.rol+";"+this.contrasena+"\n");
             return true;
         }else{
             return false;

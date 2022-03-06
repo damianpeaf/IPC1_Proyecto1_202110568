@@ -1,8 +1,6 @@
 package Controlador;
 
 import Vista.Inicio;
-import Vista.PanelAdministrador;
-import Vista.PanelUsuario;
 
 public class Biblioteca {
 
