@@ -13,3 +13,4 @@ Compilado con java 17.0.1 2021-10-19 LTS
 
 ## Ejecución
 - Doble click en archivo .jar
+- Credenciales Usuario: administrador Contraseña: password

@@ -40,12 +40,13 @@ public class PanelUsuario extends JFrame implements ActionListener, MouseListene
         JPanel panel2 = new JPanel();
         JPanel panel3 = new JPanel();
 
-        panel1.setBorder(new TitledBorder(new EtchedBorder(), "Biblioteca FIUSAC"));;
-        panel2.setBorder(new TitledBorder(new EtchedBorder(), "Opciones de Usuario"));
+        panel1.setBorder(new TitledBorder(new EtchedBorder(), "Biblioteca FIUSAC",TitledBorder.CENTER, TitledBorder.CENTER, new Font("Segoe UI Black",Font.BOLD, 24)));
+        panel2.setBorder(new TitledBorder(new EtchedBorder(), "Opciones de Usuario",TitledBorder.CENTER, TitledBorder.CENTER, new Font("Segoe UI Black",Font.BOLD, 24)));
+
         panel3.setBorder(new TitledBorder(new EtchedBorder(), "Bibliografias"));
 
         //panel arriba
-        ImageIcon banner = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("banner.png")).getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT));
+        ImageIcon banner = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("banner.png")).getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT));
         JLabel imagenBanner = new JLabel(banner);
         panel1.add(imagenBanner);
 

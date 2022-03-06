@@ -30,6 +30,8 @@ public class Inicio extends JFrame {
             }
         });
 
+
+
         JLabel titulo = new JLabel("Página de inicio");
         titulo.setFont(new Font("Segoe UI Black",Font.BOLD, 24));
         JLabel espacio = new JLabel("");
@@ -57,6 +59,15 @@ public class Inicio extends JFrame {
         JPanel panel3 = new JPanel();
         panel3.setBackground(new Color(189, 195, 199));
         JButton btnAbout = new JButton("About");
+
+        btnAbout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                About login = new About();
+                login.setVisible(true);
+            }
+        });
+
         panel3.add(btnAbout);
 
 

@@ -40,10 +40,10 @@ public class PanelAdministrador extends JFrame implements ActionListener {
         JPanel panel3 = new JPanel();
         JPanel panel4 = new JPanel();
 
-        panel1.setBorder(new TitledBorder(new EtchedBorder(), "Biblioteca FIUSAC"));;
-        panel2.setBorder(new TitledBorder(new EtchedBorder(), "Opciones de Administrador"));
-        panel3.setBorder(new TitledBorder(new EtchedBorder(), "Usuarios"));
-        panel4.setBorder(new TitledBorder(new EtchedBorder(), "Bibliografia"));
+        panel1.setBorder(new TitledBorder(new EtchedBorder(), "Biblioteca FIUSAC",TitledBorder.CENTER, TitledBorder.CENTER, new Font("Segoe UI Black",Font.BOLD, 24)));
+        panel2.setBorder(new TitledBorder(new EtchedBorder(), "Opciones de Administrador",TitledBorder.CENTER, TitledBorder.CENTER, new Font("Segoe UI Black",Font.BOLD, 24)));
+        panel3.setBorder(new TitledBorder(new EtchedBorder(), "Usuarios",TitledBorder.CENTER, TitledBorder.CENTER, new Font("Segoe UI Black",Font.BOLD, 24)));
+        panel4.setBorder(new TitledBorder(new EtchedBorder(), "Bibliografia",TitledBorder.CENTER, TitledBorder.CENTER, new Font("Segoe UI Black",Font.BOLD, 24)));
 
 
         //0->id, 1->nombre, 2->apellido, 3->nombreUsuario, 4->rol, 5->contrasena
@@ -52,8 +52,9 @@ public class PanelAdministrador extends JFrame implements ActionListener {
         this.setLayout(new GridLayout(2,2));
 
         //Panel arriba izq
-        ImageIcon banner = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("banner.png")).getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT));
+        ImageIcon banner = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("banner.png")).getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT));
         JLabel imagenBanner = new JLabel(banner);
+        panel1.setBackground(new Color(201, 201, 201));
         panel1.add(imagenBanner);
 
         //panel arriba derecha
@@ -104,6 +105,7 @@ public class PanelAdministrador extends JFrame implements ActionListener {
 
         //Panel abajo derecha
         panel4.setLayout(new GridLayout(3,1));
+        panel4.setBackground(new Color(201, 201, 201));
 
         JLabel labelBibliografia = new JLabel("");
         JPanel panelBibliografia1 = new JPanel();
@@ -116,9 +118,12 @@ public class PanelAdministrador extends JFrame implements ActionListener {
 
         panelBibliografia1.add(btnBibliografiaCrear);
         panelBibliografia1.add(btnBibliografiaVer);
+        panelBibliografia1.setBackground(new Color(201, 201, 201));
+
 
         panelBibliografia2.add(btnBibliografiaModificar);
         panelBibliografia2.add(btnBibliografiaEliminar);
+        panelBibliografia2.setBackground(new Color(201, 201, 201));
 
         panel4.add(labelBibliografia);
         panel4.add(panelBibliografia1);
